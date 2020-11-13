@@ -1,0 +1,11 @@
+version: "1"
+
+services:
+  api-sales:
+    container_name: API_SALES
+    build: .
+    command: npm start
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/node-app
