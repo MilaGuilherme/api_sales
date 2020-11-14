@@ -1,26 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const sales = require ('../models/sales');
+const Sales = require ('../models/sales');
 
 router.get('/', async (req, res) => {
-    const teste = await sales.find();
-    res.send(teste);
+    const sales = await Sales.find();
+    res.status(200).json(sales);
 });
 
 router.get('/:id', async (req, res) => {
-    const teste = await sales.findOne({_id: req.params.id});
-    res.send(teste);
+    const sale = await Sales.findOne({_id: req.params.id});
+    res.status(200).json(sale);
 });
 
 router.post('/', async (req, res) => {
-    const newSale = new sales(req.body);
+    const newSale = new Sales(req.body);
     newSale.save();
-    res.send('Cadastro realizado com sucesso');
+    res.status(201).send('Cadastro realizado com sucesso');
 });
 
 router.delete('/:id', async (req, res) => {
-    await sales.remove({_id: req.params.id});
-    res.send ("Cadastro excluido com sucesso");
+    await Sales.remove({_id: req.params.id});
+    res.status(200).send("Cadastro excluido com sucesso");
 });
 
 module.exports = router;
